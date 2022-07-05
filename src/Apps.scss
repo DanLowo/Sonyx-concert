@@ -6,6 +6,11 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-image: url(../src/img/background.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-origin: content-box;
+  height: 100%;
 }
 
 .card {
@@ -27,6 +32,10 @@ body {
   justify-content: center;
   color: #fff;
 }
+
+// .show h1{
+//   color: blue;
+// }
 
 .show p {
   text-align: center;

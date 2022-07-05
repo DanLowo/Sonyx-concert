@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
+// import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 
 import "./Apps.scss";
 import SuccessImg from "./img/success.png";
@@ -11,20 +11,15 @@ function App() {
     fullName: "",
   });
 
-  const [price, setPrice] = useState(0);
-  const [isPaymentSelected, setIsPaymentSelected] = useState(false);
+
   const [showStatus, setShowStatus] = useState(false);
-  const [paymentDetails, setPaymentDetails] = useState({
-    amount: 2000,
+  const [ paymentDetails ] = useState({
+    amount: 700,
     currency: "NGN",
     status: "successful",
     name: "Hello World",
   });
 
-  const paymentOption = [
-    { type: "Regular", price: 2000 },
-    { type: "VIP", price: 5000 },
-  ];
 
   const handleInput = (e) => {
     setFields((prevState) => ({
@@ -35,19 +30,15 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (price === 0) {
-      setIsPaymentSelected(true);
-      return;
-    }
-    setIsPaymentSelected(false);
-    handleFlutter({
-      callback: (res) => {
-        console.log(res);
-        closePaymentModal();
-        setPaymentDetails(res);
-        setShowStatus(true);
-      },
-    });
+
+    // handleFlutter({
+    //   callback: (res) => {
+    //     console.log(res);
+    //     closePaymentModal();
+    //     setPaymentDetails(res);
+    //     setShowStatus(true);
+    //   },
+    // });
   };
 
   const handleClose = () => {
@@ -56,27 +47,26 @@ function App() {
         email: "",
         fullName: "",
       });
-      setPrice(0)
     }
     setShowStatus(false);
   };
 
   const config = {
     public_key: process.env.P_KEY,
-    amount: price,
+    amount: 700,
     currency: "NGN",
     customer: {
       email,
-      name: fullName,
-      phonenumber: "09088765433",
+      name: fullName
+      // phonenumber: "09088765433",
     },
     customization: {
-      title: "Lifestyle Party",
-      description: "Pay now, to register for turnah's concert",
+      title: "CBTS CONCERT",
+      description: "book your tickets",
     },
     tx_ref: Date.now(),
   };
-  const handleFlutter = useFlutterwave(config);
+  // const handleFlutter = useFlutterwave(config);
 
   const PaymentStatus = ({ details }) => (
     <div className="paymentCard">
@@ -85,7 +75,7 @@ function App() {
           <img src={SuccessImg} alt="success" />
           <h1>Payment Successful</h1>
           <p>
-            You have now registered for Turnah's concert. Use the payment
+            You have now registered for CBTS concert. Use the payment
             receipt sent to your email as your enterance permit.
           </p>
         </>
@@ -110,8 +100,8 @@ function App() {
         <div className="main">
           <div className="card">
             <div className="show">
-              <h1>LifeStyle Party</h1>
-              <p>Book your ticket with ease</p>
+              <h1>CBTS CONCERT</h1>
+              <p>Book Ticket To Party with Sonyx</p>
             </div>
 
             <div className="showcase">
@@ -142,29 +132,8 @@ function App() {
                   />
                 </div>
 
-                <div className="group">
-                  <label htmlFor="type">Payment Type </label>
-                  <div className="payment-type">
-                    {paymentOption.map((item, k) => (
-                      <button
-                        type="button"
-                        className={price === item.price ? "active" : undefined}
-                        onClick={() => {
-                          setPrice(item.price);
-                          setIsPaymentSelected(false);
-                        }}
-                        key={k}
-                      >
-                        {item.type}
-                      </button>
-                    ))}
-                  </div>
-                  {isPaymentSelected && (
-                    <p className="error">Please select a payment type</p>
-                  )}
-                </div>
                 <button type="submit">
-                  <p>Click here to book</p>
+                  <p>Pay 700</p>
                 </button>
               </form>
             </div>
