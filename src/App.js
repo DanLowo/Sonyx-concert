@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-// import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
-
+import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 import "./Apps.scss";
 import SuccessImg from "./img/success.png";
 import FailImg from "./img/fail.png";
@@ -31,14 +30,14 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // handleFlutter({
-    //   callback: (res) => {
-    //     console.log(res);
-    //     closePaymentModal();
-    //     setPaymentDetails(res);
-    //     setShowStatus(true);
-    //   },
-    // });
+    handleFlutter({
+      callback: (res) => {
+        console.log(res);
+        closePaymentModal();
+        // setPaymentDetails(res);
+        setShowStatus(true);
+      },
+    });
   };
 
   const handleClose = () => {
@@ -52,7 +51,7 @@ function App() {
   };
 
   const config = {
-    public_key: process.env.P_KEY,
+    public_key:"FLWPUBK-6c22bb36e48a919db211777df257a762-X",
     amount: 700,
     currency: "NGN",
     customer: {
@@ -66,7 +65,7 @@ function App() {
     },
     tx_ref: Date.now(),
   };
-  // const handleFlutter = useFlutterwave(config);
+  const handleFlutter = useFlutterwave(config);
 
   const PaymentStatus = ({ details }) => (
     <div className="paymentCard">
